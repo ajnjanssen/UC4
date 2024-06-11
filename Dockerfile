@@ -2,15 +2,15 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 # Set the working directory inside the container
-WORKDIR /src
+WORKDIR /app
 
 # Copy the .csproj file and restore dependencies
-COPY ["src/Api/Api.csproj", "src/Api/"]
-RUN dotnet restore "src/Api/Api.csproj"
+COPY UC4.csproj ./
+RUN dotnet restore UC4.csproj
 
 # Copy the entire project and build it
 COPY . .
-RUN dotnet publish "src/Api/Api.csproj" -c Release -o /app/publish --no-restore
+RUN dotnet publish UC4.csproj -c Release -o /out --no-restore
 
 # Stage 2: Create the runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
@@ -19,7 +19,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
 # Copy the published files from the build stage
-COPY --from=build /app/publish .
+COPY --from=build /out .
 
 # Set environment variables
 ENV ASPNETCORE_URLS=http://+:3000
@@ -29,4 +29,4 @@ ENV NIXPACKS_CSHARP_SDK_VERSION=8.0
 EXPOSE 3000
 
 # Entry point to run the application
-ENTRYPOINT ["dotnet", "Api.dll"]
+ENTRYPOINT ["dotnet", "UC4.dll"]
