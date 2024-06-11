@@ -15,8 +15,8 @@ RUN dotnet publish UC4.csproj -c Release -o /app/publish --no-restore
 # Stage 2: Create the runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
-# Install curl and SQLite
-RUN apt-get update && apt-get install -y curl sqlite3 libsqlite3-dev
+# Install curl
+RUN apt-get update && apt-get install -y curl
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -24,16 +24,8 @@ WORKDIR /app
 # Copy the published files from the build stage
 COPY --from=build /app/publish .
 
-# Ensure the data directory exists
-RUN mkdir -p /app/data
-
-# Copy SQLite database file (ensure this path is correct)
-COPY umbraco/Data/Umbraco.sqlite.db /app/data/Umbraco.sqlite.db
-
 # Set environment variables
 ENV ASPNETCORE_URLS=http://+:3000
-ENV NIXPACKS_CSHARP_SDK_VERSION=8.0
-ENV ConnectionStrings__umbracoDbDSN=Data Source=/app/data/Umbraco.sqlite.db;Cache=Shared
 
 # Expose the port that the application runs on
 EXPOSE 3000
