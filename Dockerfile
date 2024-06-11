@@ -15,8 +15,8 @@ RUN dotnet publish UC4.csproj -c Release -o /out --no-restore
 # Stage 2: Create the runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
-# Install curl
-RUN apt-get update && apt-get install -y curl
+# Install curl and SQLite
+RUN apt-get update && apt-get install -y curl sqlite3 libsqlite3-dev
 
 # Set the working directory inside the container
 WORKDIR /app
