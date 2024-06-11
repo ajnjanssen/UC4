@@ -11,7 +11,7 @@ services:
     volumes:
       - ./umbraco/Data:/app/data
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__umbracoDbDSN=Data Source=/app/data/Umbraco.sqlite.db;Cache=Shared
     logging:
       driver: json-file

@@ -1,5 +1,12 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+// Conditionally set URLs based on the environment
+if (builder.Environment.IsDevelopment())
+{
+    builder.WebHost.UseUrls("http://*:3000");
+}
+
+// Create and configure Umbraco
 builder.CreateUmbracoBuilder()
     .AddBackOffice()
     .AddWebsite()
@@ -10,7 +17,6 @@ builder.CreateUmbracoBuilder()
 WebApplication app = builder.Build();
 
 await app.BootUmbracoAsync();
-
 
 app.UseUmbraco()
     .WithMiddleware(u =>
