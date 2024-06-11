@@ -24,6 +24,9 @@ WORKDIR /app
 # Copy the published files from the build stage
 COPY --from=build /app/publish .
 
+# Ensure the data directory exists
+RUN mkdir -p /app/data
+
 # Copy SQLite database file (ensure this path is correct)
 COPY ./umbraco/Data/Umbraco.sqlite.db /app/data/Umbraco.sqlite.db
 
