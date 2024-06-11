@@ -28,7 +28,7 @@ COPY --from=build /app/publish .
 RUN mkdir -p /app/data
 
 # Copy SQLite database file (ensure this path is correct)
-COPY ./umbraco/Data/Umbraco.sqlite.db /app/data/Umbraco.sqlite.db
+COPY umbraco/Data/Umbraco.sqlite.db /app/data/Umbraco.sqlite.db
 
 # Set environment variables
 ENV ASPNETCORE_URLS=http://+:3000
