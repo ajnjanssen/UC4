@@ -24,9 +24,13 @@ WORKDIR /app
 # Copy the published files from the build stage
 COPY --from=build /app/publish .
 
+# Copy SQLite database file (ensure this path is correct)
+COPY ./umbraco/Data/Umbraco.sqlite.db /app/data/Umbraco.sqlite.db
+
 # Set environment variables
 ENV ASPNETCORE_URLS=http://+:3000
 ENV NIXPACKS_CSHARP_SDK_VERSION=8.0
+ENV ConnectionStrings__umbracoDbDSN=Data Source=/app/data/Umbraco.sqlite.db;Cache=Shared
 
 # Expose the port that the application runs on
 EXPOSE 3000
