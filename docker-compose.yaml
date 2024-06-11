@@ -9,10 +9,10 @@ services:
     ports:
       - "8081:3000"
     volumes:
-      - umbraco_data:/app/data
+      - ./umbraco/Data:/app/data
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__umbracoDbDSN=Data Source=/app/data/Umbraco.s3db;Cache=Shared
+      - ConnectionStrings__umbracoDbDSN=Data Source=/app/data/Umbraco.sqlite.db;Cache=Shared
     logging:
       driver: json-file
       options:

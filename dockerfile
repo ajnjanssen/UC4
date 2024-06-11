@@ -36,4 +36,3 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=1m --retries=3 CMD curl 
 
 # Entry point to run the application
 ENTRYPOINT ["dotnet", "UC4.dll"]
-
