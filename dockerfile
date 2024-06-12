@@ -6,11 +6,11 @@ WORKDIR /app
 
 # Copy the .csproj file and restore dependencies
 COPY UC4.csproj ./
-RUN dotnet restore UC4.csproj
+RUN dotnet restore
 
 # Copy the entire project and build it
 COPY . .
-RUN dotnet publish UC4.csproj -c Release -o /app/publish --no-restore
+RUN dotnet publish -c Release -o /app/publish --no-restore
 
 # Stage 2: Create the runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
