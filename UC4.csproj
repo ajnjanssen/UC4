@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Umbraco.Cms" Version="14.0.0" />
     <PackageReference Include="MySql.Data" Version="8.0.23" />
-    <PackageReference Include="MySql.Data.EntityFramework" Version="8.0.23" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,5 +27,4 @@
     <RazorCompileOnBuild>false</RazorCompileOnBuild>
     <RazorCompileOnPublish>false</RazorCompileOnPublish>
   </PropertyGroup>
-
 </Project>
