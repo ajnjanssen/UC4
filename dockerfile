@@ -24,6 +24,9 @@ WORKDIR /app
 # Copy the published files from the build stage
 COPY --from=build /app/publish .
 
+# Ensure the data and media directories exist
+RUN mkdir -p /app/wwwroot/media
+
 # Set environment variables
 ENV ASPNETCORE_URLS=http://+:3000
 
